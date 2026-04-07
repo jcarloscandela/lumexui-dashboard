@@ -9,10 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor.Sonner" Version="0.0.2" />
-    <PackageReference Include="LumexUI" Version="2.0.1" />
+    <PackageReference Include="Blazor.Sonner" Version="0.0.5" />
+    <PackageReference Include="LumexUI" Version="2.3.5" />
     <ProjectReference Include="..\LumexDashboard.Client\LumexDashboard.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.5" />
   </ItemGroup>
 
   <Target Name="BuildTailwindCSS" BeforeTargets="Build">

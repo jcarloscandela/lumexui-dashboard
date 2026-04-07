@@ -283,7 +283,10 @@
         }
 
         // Show toast via Blazor.Sonner
-        Toast.Success($"{item.Title}", new ToastModel { Description = "Command executed successfully" });
+        Toast.Success($"{item.Title}", t =>
+        {
+            t.Description = "Command executed successfully";
+        });
     }
 
     private string GetItemClass(CommandItem item)

@@ -395,12 +395,18 @@
     private void SelectRoom(string room)
     {
         _selectedRoom = room;
-        Toast.Info("Room Selected", new ToastModel { Description = $"Showing devices for {room}" });
+        Toast.Info("Room Selected", t =>
+        {
+            t.Description = $"Showing devices for {room}";
+        });
     }
 
     private void RefreshAllDevices()
     {
-        Toast.Success("Devices Refreshed", new ToastModel { Description = "All device statuses have been updated" });
+        Toast.Success("Devices Refreshed", t =>
+        {
+            t.Description = "All device statuses have been updated";
+        });
     }
 
     private void DecreaseTemperature()
@@ -408,7 +414,10 @@
         if (_temperature > 15)
         {
             _temperature--;
-            Toast.Info("Temperature Adjusted", new ToastModel { Description = $"Temperature set to {_temperature}°C" });
+            Toast.Info("Temperature Adjusted", t =>
+            {
+                t.Description = $"Temperature set to {_temperature}°C";
+            });
         }
     }
 
@@ -417,7 +426,10 @@
         if (_temperature < 30)
         {
             _temperature++;
-            Toast.Info("Temperature Adjusted", new ToastModel { Description = $"Temperature set to {_temperature}°C" });
+            Toast.Info("Temperature Adjusted", t =>
+            {
+                t.Description = $"Temperature set to {_temperature}°C";
+            });
         }
     }
 
@@ -426,7 +438,10 @@
         var newState = !(_frontDoorLocked && _backDoorLocked);
         _frontDoorLocked = newState;
         _backDoorLocked = newState;
-        Toast.Success(newState ? "All Doors Locked" : "All Doors Unlocked", new ToastModel { Description = newState ? "Your home is now secured" : "All doors have been unlocked" });
+        Toast.Success(newState ? "All Doors Locked" : "All Doors Unlocked", t =>
+        {
+            t.Description = newState ? "Your home is now secured" : "All doors have been unlocked";
+        });
     }
 
     private void SetBlindPosition(string blindName, int position)
@@ -435,7 +450,10 @@
         if (blind != null)
         {
             blind.Position = position;
-            Toast.Info("Blind Adjusted", new ToastModel { Description = $"{blindName} set to {position}%" });
+            Toast.Info("Blind Adjusted", t =>
+            {
+                t.Description = $"{blindName} set to {position}%";
+            });
         }
     }
 
@@ -446,14 +464,20 @@
         {
             appliance.IsOn = isOn;
             appliance.Status = isOn ? "On" : "Off";
-            Toast.Info(name, new ToastModel { Description = isOn ? "Device turned on" : "Device turned off" });
+            Toast.Info(name, t =>
+            {
+                t.Description = isOn ? "Device turned on" : "Device turned off";
+            });
         }
     }
 
     private void ActivateScene(string sceneName)
     {
         _activeScene = sceneName;
-        Toast.Success("Scene Activated", new ToastModel { Description = $"{sceneName} scene has been applied" });
+        Toast.Success("Scene Activated", t =>
+        {
+            t.Description = $"{sceneName} scene has been applied";
+        });
         
         // Apply scene-specific settings
         switch (sceneName)
@@ -494,7 +518,10 @@
 
     private void CreateNewScene()
     {
-        Toast.Info("Create Scene", new ToastModel { Description = "Scene creation wizard would open here" });
+        Toast.Info("Create Scene", t =>
+        {
+            t.Description = "Scene creation wizard would open here";
+        });
     }
 
     private record BlindData(string Name, int Position)

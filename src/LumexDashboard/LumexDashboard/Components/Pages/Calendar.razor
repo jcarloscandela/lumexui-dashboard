@@ -526,7 +526,10 @@
     {
         if (string.IsNullOrWhiteSpace(_eventForm.Title))
         {
-            Toast.Error("Error", new ToastModel { Description = "Please enter an event title" });
+            Toast.Error("Error", t =>
+            {
+                t.Description = "Please enter an event title";
+            });
             return;
         }
 
@@ -535,7 +538,10 @@
 
         if (endTime <= startTime)
         {
-            Toast.Error("Error", new ToastModel { Description = "End time must be after start time" });
+            Toast.Error("Error", t =>
+            {
+                t.Description = "End time must be after start time";
+            });
             return;
         }
 
@@ -548,7 +554,10 @@
             _editingEvent.Location = _eventForm.Location;
             _editingEvent.Color = _eventForm.Color;
             _editingEvent.AllDay = _eventForm.AllDay;
-            Toast.Success("Event Updated", new ToastModel { Description = $"'{_eventForm.Title}' has been updated" });
+            Toast.Success("Event Updated", t =>
+            {
+                t.Description = $"'{_eventForm.Title}' has been updated";
+            });
         }
         else
         {
@@ -562,7 +571,10 @@
                 _eventForm.AllDay
             );
             _events.Add(newEvent);
-            Toast.Success("Event Created", new ToastModel { Description = $"'{_eventForm.Title}' has been created" });
+            Toast.Success("Event Created", t =>
+            {
+                t.Description = $"'{_eventForm.Title}' has been created";
+            });
         }
 
         CloseEventModal();
@@ -573,7 +585,10 @@
         if (_editingEvent != null)
         {
             _events.Remove(_editingEvent);
-            Toast.Success("Event Deleted", new ToastModel { Description = $"'{_editingEvent.Title}' has been deleted" });
+            Toast.Success("Event Deleted", t =>
+            {
+                t.Description = $"'{_editingEvent.Title}' has been deleted";
+            });
             CloseEventModal();
         }
     }
