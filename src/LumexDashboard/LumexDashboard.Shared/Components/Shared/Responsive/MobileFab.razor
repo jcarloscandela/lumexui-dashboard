@@ -1,0 +1,39 @@
+<div class="@GetClasses()">
+    <button class="w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
+            @onclick="OnClick">
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        }
+        else
+        {
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        }
+    </button>
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public string Position { get; set; } = "left";
+    [Parameter] public string HideAt { get; set; } = "lg";
+    [Parameter] public int ZIndex { get; set; } = 50;
+    [Parameter] public string? Class { get; set; }
+
+    private string GetClasses()
+    {
+        var hideClass = HideAt switch
+        {
+            "sm" => "sm:hidden",
+            "md" => "md:hidden",
+            "xl" => "xl:hidden",
+            "2xl" => "2xl:hidden",
+            _ => "lg:hidden"
+        };
+        var positionClass = Position == "right" ? "right-4" : "left-4";
+        var baseClasses = $"fixed bottom-4 {positionClass} z-{ZIndex} {hideClass}";
+        return string.IsNullOrEmpty(Class) ? baseClasses : $"{baseClasses} {Class}";
+    }
+}

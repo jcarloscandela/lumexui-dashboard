@@ -1,0 +1,23 @@
+<div class="@GetClasses()">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public string? Class { get; set; }
+    [Parameter] public string Display { get; set; } = "block";
+
+    private string GetClasses()
+    {
+        var displayClass = Display switch
+        {
+            "flex" => "flex md:hidden",
+            "grid" => "grid md:hidden",
+            "inline" => "inline md:hidden",
+            "inline-block" => "inline-block md:hidden",
+            "inline-flex" => "inline-flex md:hidden",
+            _ => "block md:hidden"
+        };
+        return string.IsNullOrEmpty(Class) ? displayClass : $"{displayClass} {Class}";
+    }
+}

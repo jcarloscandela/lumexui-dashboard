@@ -1,22 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
-    <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
-    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>preview</LangVersion>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
   </PropertyGroup>
-
   <ItemGroup>
+    <PackageReference Include="Blazor.Sonner" Version="0.0.5" />
     <PackageReference Include="LumexUI" Version="2.3.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.5" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\LumexDashboard.Shared\LumexDashboard.Shared.csproj" />
   </ItemGroup>
-
+  <Target Name="BuildTailwindCSS" BeforeTargets="Build">
+    <Exec Command="npx @tailwindcss/cli -i wwwroot/app.css -o wwwroot/app.build.css --minify" WorkingDirectory="$(ProjectDir)" />
+  </Target>
 </Project>

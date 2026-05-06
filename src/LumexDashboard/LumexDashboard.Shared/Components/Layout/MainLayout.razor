@@ -1,0 +1,59 @@
+@inherits LayoutComponentBase
+@inject IJSRuntime JS
+@inject AppStateService AppState
+@inject ToastService Toast
+
+<div class="@MainLayoutStyles.GetContainerStyles()">
+    <Sidebar />
+    <MobileOverlay Visible="AppState.SidebarOpen" OnClick="AppState.ToggleSidebar" ZIndex="20" />
+    <div class="@MainLayoutStyles.GetContentAreaStyles()">
+        <TopBar />
+        <main class="@MainLayoutStyles.GetMainStyles()">
+            @Body
+        </main>
+    </div>
+</div>
+
+<Toaster Position="ToastPosition.BottomRight" RichColors="true" CloseButton="true" />
+
+<CommandPalette @ref="_commandPalette" />
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
+
+@implements IDisposable
+@code {
+    private CommandPalette? _commandPalette;
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    public void ShowToast(string title, string message, string? type = "info")
+    {
+        switch ((type ?? "info").Trim().ToLowerInvariant())
+        {
+            case "success":
+                Toast.Success(title, t => { t.Description = message; });
+                break;
+            case "error":
+                Toast.Error(title, t => { t.Description = message; });
+                break;
+            case "warning":
+                Toast.Warning(title, t => { t.Description = message; });
+                break;
+            default:
+                Toast.Info(title, t => { t.Description = message; });
+                break;
+        }
+    }
+}

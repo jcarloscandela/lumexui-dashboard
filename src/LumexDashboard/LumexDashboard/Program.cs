@@ -1,5 +1,5 @@
 using Blazor.Sonner.Extensions;
-using LumexDashboard.Client.Services;
+using LumexDashboard.Shared.Services;
 using LumexDashboard.Components;
 using LumexUI.Extensions;
 
@@ -42,6 +42,8 @@ app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(LumexDashboard.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(
+        typeof(LumexDashboard.Client._Imports).Assembly,
+        typeof(LumexDashboard.Shared._Imports).Assembly);
 
 app.Run();

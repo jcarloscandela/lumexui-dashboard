@@ -12,6 +12,7 @@
     <PackageReference Include="Blazor.Sonner" Version="0.0.5" />
     <PackageReference Include="LumexUI" Version="2.3.5" />
     <ProjectReference Include="..\LumexDashboard.Client\LumexDashboard.Client.csproj" />
+    <ProjectReference Include="..\LumexDashboard.Shared\LumexDashboard.Shared.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.5" />
   </ItemGroup>
 
